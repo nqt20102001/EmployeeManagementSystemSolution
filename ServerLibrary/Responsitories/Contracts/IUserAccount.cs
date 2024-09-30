@@ -8,5 +8,6 @@ namespace ServerLibrary.Responsitories.Contracts
     {
         Task<GeneralRespone> CreateAsync(Register user);
         Task<LoginRespone> SignInAsync(Login user);
+        Task<LoginRespone> RefreshTokenAsync(RefreshToken token);
     }
 }
