@@ -6,7 +6,7 @@ namespace Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticationController(IUserAccount accountInterface) : ControllerBase
+    public class AuthenticationController(IUserAccountRepository accountInterface) : ControllerBase
     {
         [HttpPost("register")]
         public async Task<IActionResult> CreateAsync(Register user)
