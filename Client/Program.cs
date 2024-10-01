@@ -11,6 +11,10 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
+builder.Services.AddHttpClient("SystemApiClient", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7220/");
+});
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7220/") });
 builder.Services.AddAuthorizationCore();
 builder.Services.AddBlazoredLocalStorage();
