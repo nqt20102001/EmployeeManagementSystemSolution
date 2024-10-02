@@ -1,10 +1,9 @@
-﻿
-@page "/identity/account/login"
+﻿@page "/identity/account/login"
 
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
-            <EditForm Enhance Model="User" OnInvalidSubmit="HandleLogin">
+            <EditForm Model="User" OnValidSubmit="HandleLogin">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
                 <div class="card">
@@ -16,7 +15,7 @@
                         </div>
                         <div class="form-group mt-3">
                             <label class="form-label">Password</label>
-                            <input @bind="User.Password" class="form-control" type="password"></input>
+                            <InputText @bind-Value="User.Password" class="form-control" type="password"></InputText>
                         </div>
                         <div class="form-group mt-3">
                             <button class="btn btn-outline-primary float-end" type="submit">Login</button>
@@ -28,7 +27,7 @@
     </div>
 </div>
 
-@code{
+@code {
     Login User = new();
     async Task HandleLogin()
     {
@@ -37,9 +36,10 @@
         {
             var customAuthStateProvider = (CustomAuthenticationStateProvider)AuthStateProvider;
             await customAuthStateProvider.UpdateAuthenticationState(new UserSession()
-            {
-                Token = result.Token, RefreshToken = result.RefreshToken
-            });
+                {
+                    Token = result.Token,
+                    RefreshToken = result.RefreshToken
+                });
             NavManager.NavigateTo("/", forceLoad: true);
         }
     }

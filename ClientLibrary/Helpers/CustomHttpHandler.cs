@@ -50,7 +50,7 @@ namespace ClientLibrary.Helpers
         private async Task<string> GetReshToken(string refreshToken)
         {
             var result = await accountService.RefreshTokenAsync(new RefreshToken { Token = refreshToken });
-            string serializedToken = Serializations.SerializeObject(new UserSession() { Token = result.Token, RefreshToken = result.RefreshToken };
+            string serializedToken = Serializations.SerializeObject(new UserSession() { Token = result.Token, RefreshToken = result.RefreshToken });
             await localStorageService.SetToken(serializedToken);
             return result.Token;
         }
